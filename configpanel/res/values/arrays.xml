@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2016 The CyanogenMod Project
+     Copyright (C) 2018 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,20 +15,6 @@
      limitations under the License.
 -->
 <resources>
-
-    <string-array name="notification_slider_action_entries" translatable="false">
-        <item>@string/notification_slider_mode_total_silence</item>
-        <item>@string/notification_slider_mode_alarms_only</item>
-        <item>@string/notification_slider_mode_priority_only</item>
-        <item>@string/notification_slider_mode_none</item>
-    </string-array>
-
-    <string-array name="notification_slider_action_entry_values" translatable="false">
-        <item>600</item>
-        <item>601</item>
-        <item>602</item>
-        <item>603</item>
-    </string-array>
 
     <string-array name="notification_slider_usage_entries" translatable="false">
         <item>@string/notification_slider_for_notification</item>
@@ -50,14 +36,12 @@
 
     <string-array name="notification_slider_mode_entries" translatable="false">
         <item>@string/notification_slider_mode_total_silence</item>
-        <item>@string/notification_slider_mode_alarms_only</item>
         <item>@string/notification_slider_mode_priority_only</item>
         <item>@string/notification_slider_mode_none</item>
     </string-array>
 
     <string-array name="notification_slider_mode_entry_values" translatable="false">
         <item>10</item>
-        <item>11</item>
         <item>12</item>
         <item>13</item>
     </string-array>
@@ -115,7 +99,6 @@
     <string-array name="notification_ringer_slider_mode_entries" translatable="false">
         <item>@string/notification_slider_mode_total_silence</item>
         <item>@string/notification_slider_ringer_silent</item>
-        <item>@string/notification_slider_mode_alarms_only</item>
         <item>@string/notification_slider_mode_priority_only</item>
         <item>@string/notification_slider_ringer_vibrate</item>
         <item>@string/notification_slider_mode_none</item>
@@ -124,7 +107,6 @@
     <string-array name="notification_ringer_slider_mode_entry_values" translatable="false">
         <item>60</item>
         <item>65</item>
-        <item>61</item>
         <item>62</item>
         <item>64</item>
         <item>63</item>

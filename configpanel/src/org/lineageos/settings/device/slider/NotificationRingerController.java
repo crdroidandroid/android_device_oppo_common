@@ -32,7 +32,6 @@ public final class NotificationRingerController extends SliderControllerBase {
     private static final String TAG = "NotificationRingerController";
 
     private static final int NOTIFICATION_TOTAL_SILENCE = 60;
-    private static final int NOTIFICATION_ALARMS_ONLY = 61;
     private static final int NOTIFICATION_PRIORITY_ONLY = 62;
     private static final int NOTIFICATION_ALL = 63;
     private static final int RINGER_VIBRATE = 64;
@@ -87,17 +86,6 @@ public final class NotificationRingerController extends SliderControllerBase {
                     public void run() {
                         if (mZenMode != NOTIFICATION_TOTAL_SILENCE) return;
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
-                    }
-                }, CHANGE_DELAY);
-                return true;
-            case NOTIFICATION_ALARMS_ONLY:
-                mZenMode = NOTIFICATION_ALARMS_ONLY;
-                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mZenMode != NOTIFICATION_ALARMS_ONLY) return;
-                        mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_ALARMS, null, TAG);
                     }
                 }, CHANGE_DELAY);
                 return true;

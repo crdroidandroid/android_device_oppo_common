@@ -135,7 +135,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
     public KeyHandler(Context context) {
         mContext = context;
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mPowerManager = context.getSystemService(PowerManager.class);
         mEventHandler = new EventHandler();
         mGestureWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "GestureWakeLock");
@@ -147,7 +147,7 @@ public class KeyHandler implements DeviceKeyHandler {
                 org.lineageos.platform.internal.R.bool.config_proximityCheckOnWake);
 
         if (mProximityWakeSupported) {
-            mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            mSensorManager = context.getSystemService(SensorManager.class);
             mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             mProximityWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "ProximityWakeLock");

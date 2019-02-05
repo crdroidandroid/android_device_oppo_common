@@ -45,7 +45,7 @@ public class Constants {
 
     // Button nodes
     public static final String BUTTON_SWAP_NODE = "/proc/s1302/key_rep";
-    public static final String NOTIF_SLIDER_NODE = "/sys/class/switch/tri-state-key/state";
+    public static final String NOTIF_SLIDER_NODE = "/sys/devices/virtual/switch/tri-state-key/state";
 
     public static final String NOTIF_SLIDER_FOR_NOTIFICATION = "1";
     public static final String NOTIF_SLIDER_FOR_FLASHLIGHT = "2";

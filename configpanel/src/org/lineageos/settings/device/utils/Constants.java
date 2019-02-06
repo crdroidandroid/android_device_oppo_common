@@ -91,6 +91,6 @@ public class Constants {
     }
 
     public static boolean isNotificationSliderSupported() {
-        return FileUtils.fileExists(NOTIF_SLIDER_NODE);
+        return true;
     }
 }

@@ -13,6 +13,5 @@ LOCAL_C_INCLUDES := bootable/recovery \
 
 LOCAL_SRC_FILES := recovery_updater.cpp
 LOCAL_MODULE := librecovery_updater_oppo
-LOCAL_MODULE_TAGS := eng
 
 include $(BUILD_STATIC_LIBRARY)

@@ -22,8 +22,8 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceManager;
 
 import org.lineageos.internal.util.FileUtils;
 

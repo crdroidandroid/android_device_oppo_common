@@ -29,6 +29,7 @@
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
     <protected-broadcast android:name="org.lineageos.settings.device.UPDATE_SLIDER_SETTINGS" />
+    <protected-broadcast android:name="org.lineageos.settings.device.UPDATE_SLIDER_POSITION" />
 
     <uses-sdk
         android:minSdkVersion="24" />

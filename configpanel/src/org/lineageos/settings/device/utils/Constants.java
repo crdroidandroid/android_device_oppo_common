@@ -55,8 +55,12 @@ public class Constants {
     public static final String ACTION_UPDATE_SLIDER_SETTINGS
             = "org.lineageos.settings.device.UPDATE_SLIDER_SETTINGS";
 
+    public static final String ACTION_UPDATE_SLIDER_POSITION
+            = "org.lineageos.settings.device.UPDATE_SLIDER_POSITION";
+
     public static final String EXTRA_SLIDER_USAGE = "usage";
     public static final String EXTRA_SLIDER_ACTIONS = "actions";
+    public static final String EXTRA_SLIDER_POSITION = "position";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();

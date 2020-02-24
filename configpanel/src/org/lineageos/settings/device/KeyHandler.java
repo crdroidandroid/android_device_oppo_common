@@ -212,7 +212,7 @@ public class KeyHandler implements DeviceKeyHandler {
         }
 
         if (isSliderControllerSupported) {
-            mSliderController.processEvent(scanCode);
+            mSliderController.processEvent(mContext, scanCode);
         } else if (!mEventHandler.hasMessages(GESTURE_REQUEST)) {
             Message msg = getMessageForKeyEvent(scanCode);
             boolean defaultProximity = mContext.getResources().getBoolean(

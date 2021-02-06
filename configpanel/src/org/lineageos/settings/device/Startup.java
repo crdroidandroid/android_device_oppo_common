@@ -50,23 +50,7 @@ public class Startup extends BroadcastReceiver {
                 disableComponent(context, ButtonSettingsActivity.class.getName());
             } else {
                 enableComponent(context, ButtonSettingsActivity.class.getName());
-
-                // Restore nodes to saved preference values
-                for (String pref : Constants.sButtonPrefKeys) {
-                    String node, value;
-                    if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
-                        node = Constants.sStringNodePreferenceMap.get(pref);
-                        value = Constants.getPreferenceString(context, pref);
-                    } else {
-                        node = Constants.sBooleanNodePreferenceMap.get(pref);
-                        value = Constants.isPreferenceEnabled(context, pref) ?
-                                "1" : "0";
-                    }
-                    if (!FileUtils.writeLine(node, value)) {
-                        Log.w(TAG, "Write to node " + node +
-                            " failed while restoring saved preference values");
-                    }
-                }
+                ButtonSettingsFragment.restoreSliderStates(context);
             }
 
             // Disable O-Click settings if needed
@@ -84,9 +68,7 @@ public class Startup extends BroadcastReceiver {
     }
 
     static boolean hasButtonProcs() {
-        return (FileUtils.fileExists(Constants.NOTIF_SLIDER_TOP_NODE) &&
-                FileUtils.fileExists(Constants.NOTIF_SLIDER_MIDDLE_NODE) &&
-                FileUtils.fileExists(Constants.NOTIF_SLIDER_BOTTOM_NODE));
+        return FileUtils.fileExists(Constants.NOTIF_SLIDER_NODE);
     }
 
     static boolean hasOClick() {

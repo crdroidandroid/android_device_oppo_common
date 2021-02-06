@@ -22,9 +22,10 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceManager;
+
+import org.lineageos.internal.util.FileUtils;
 
 public class Constants {
 
@@ -35,14 +36,27 @@ public class Constants {
     public static final String OCLICK_FIND_PHONE_KEY = "oclick_find_my_phone";
     public static final String OCLICK_FENCE_KEY = "oclick_fence";
     public static final String OCLICK_DISCONNECT_ALERT_KEY = "oclick_disconnect_alert";
-    public static final String NOTIF_SLIDER_TOP_KEY = "keycode_top_position";
-    public static final String NOTIF_SLIDER_MIDDLE_KEY = "keycode_middle_position";
-    public static final String NOTIF_SLIDER_BOTTOM_KEY = "keycode_bottom_position";
+    public static final String NOTIF_SLIDER_PANEL_KEY = "notification_slider";
+    public static final String NOTIF_SLIDER_USAGE_KEY = "slider_usage";
+    public static final String NOTIF_SLIDER_ACTION_TOP_KEY = "action_top_position";
+    public static final String NOTIF_SLIDER_ACTION_MIDDLE_KEY = "action_middle_position";
+    public static final String NOTIF_SLIDER_ACTION_BOTTOM_KEY = "action_bottom_position";
 
     // Button nodes
-    public static final String NOTIF_SLIDER_TOP_NODE = "/proc/tri-state-key/keyCode_top";
-    public static final String NOTIF_SLIDER_MIDDLE_NODE = "/proc/tri-state-key/keyCode_middle";
-    public static final String NOTIF_SLIDER_BOTTOM_NODE = "/proc/tri-state-key/keyCode_bottom";
+    public static final String NOTIF_SLIDER_NODE = "/sys/class/switch/tri-state-key/state";
+
+    public static final String NOTIF_SLIDER_FOR_NOTIFICATION = "1";
+    public static final String NOTIF_SLIDER_FOR_FLASHLIGHT = "2";
+    public static final String NOTIF_SLIDER_FOR_BRIGHTNESS = "3";
+    public static final String NOTIF_SLIDER_FOR_ROTATION = "4";
+    public static final String NOTIF_SLIDER_FOR_RINGER = "5";
+    public static final String NOTIF_SLIDER_FOR_NOTIFICATION_RINGER = "6";
+
+    public static final String ACTION_UPDATE_SLIDER_SETTINGS
+            = "org.lineageos.settings.device.UPDATE_SLIDER_SETTINGS";
+
+    public static final String EXTRA_SLIDER_USAGE = "usage";
+    public static final String EXTRA_SLIDER_ACTIONS = "actions";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
@@ -51,21 +65,7 @@ public class Constants {
     // Holds <preference_key> -> <default_values> mapping
     public static final Map<String, Object> sNodeDefaultMap = new HashMap<>();
 
-    public static final String[] sButtonPrefKeys = {
-        NOTIF_SLIDER_TOP_KEY,
-        NOTIF_SLIDER_MIDDLE_KEY,
-        NOTIF_SLIDER_BOTTOM_KEY
-    };
-
     static {
-        sStringNodePreferenceMap.put(NOTIF_SLIDER_TOP_KEY, NOTIF_SLIDER_TOP_NODE);
-        sStringNodePreferenceMap.put(NOTIF_SLIDER_MIDDLE_KEY, NOTIF_SLIDER_MIDDLE_NODE);
-        sStringNodePreferenceMap.put(NOTIF_SLIDER_BOTTOM_KEY, NOTIF_SLIDER_BOTTOM_NODE);
-
-        sNodeDefaultMap.put(NOTIF_SLIDER_TOP_KEY, "601");
-        sNodeDefaultMap.put(NOTIF_SLIDER_MIDDLE_KEY, "602");
-        sNodeDefaultMap.put(NOTIF_SLIDER_BOTTOM_KEY, "603");
-
         sNodeDefaultMap.put(OCLICK_FENCE_KEY, true);
         sNodeDefaultMap.put(OCLICK_DISCONNECT_ALERT_KEY, true);
     }
@@ -78,5 +78,9 @@ public class Constants {
     public static String getPreferenceString(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, (String) sNodeDefaultMap.get(key));
+    }
+
+    public static boolean isNotificationSliderSupported() {
+        return FileUtils.fileExists(NOTIF_SLIDER_NODE);
     }
 }

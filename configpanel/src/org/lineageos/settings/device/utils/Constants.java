@@ -61,6 +61,25 @@ public class Constants {
     public static final String EXTRA_SLIDER_USAGE = "usage";
     public static final String EXTRA_SLIDER_ACTIONS = "actions";
     public static final String EXTRA_SLIDER_POSITION = "position";
+    public static final String EXTRA_SLIDER_POSITION_VALUE = "position_value";
+
+    public static final int MODE_TOTAL_SILENCE = 600;
+    public static final int MODE_ALARMS_ONLY = 601;
+    public static final int MODE_PRIORITY_ONLY = 602;
+    public static final int MODE_NONE = 603;
+    public static final int MODE_VIBRATE = 604;
+    public static final int MODE_RING = 605;
+    public static final int MODE_SILENT = 620;
+    public static final int MODE_FLASHLIGHT_ON = 621;
+    public static final int MODE_FLASHLIGHT_OFF = 622;
+    public static final int MODE_FLASHLIGHT_BLINK = 623;
+    public static final int MODE_BRIGHTNESS_BRIGHT = 630;
+    public static final int MODE_BRIGHTNESS_DARK = 631;
+    public static final int MODE_BRIGHTNESS_AUTO = 632;
+    public static final int MODE_ROTATION_AUTO = 640;
+    public static final int MODE_ROTATION_0 = 641;
+    public static final int MODE_ROTATION_90 = 642;
+    public static final int MODE_ROTATION_270 = 643;
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();

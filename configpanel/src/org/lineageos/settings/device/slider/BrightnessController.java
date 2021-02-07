@@ -22,6 +22,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import org.lineageos.settings.device.SliderControllerBase;
+import org.lineageos.settings.device.utils.Constants;
 
 public final class BrightnessController extends SliderControllerBase {
 
@@ -41,23 +42,30 @@ public final class BrightnessController extends SliderControllerBase {
     }
 
     @Override
-    protected boolean processAction(int action) {
+    protected int processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         switch (action) {
             case BRIGHTNESS_AUTO:
-                return writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
+                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC))
+                    return Constants.MODE_BRIGHTNESS_AUTO;
+                break;
             case BRIGHTNESS_BRIGHTEST:
-                return writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
+                if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) &&
-                    writeSettings(Settings.System.SCREEN_BRIGHTNESS, BRIGHTEST);
+                    writeSettings(Settings.System.SCREEN_BRIGHTNESS, BRIGHTEST))
+                    return Constants.MODE_BRIGHTNESS_BRIGHT;
+                break;
             case BRIGHTNESS_DARKEST:
-                return writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
+                if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) &&
-                    writeSettings(Settings.System.SCREEN_BRIGHTNESS, DARKEST);
+                    writeSettings(Settings.System.SCREEN_BRIGHTNESS, DARKEST))
+                    return Constants.MODE_BRIGHTNESS_DARK;
+                break;
             default:
-                return false;
+                return 0;
         }
+        return 0;
     }
 
     @Override

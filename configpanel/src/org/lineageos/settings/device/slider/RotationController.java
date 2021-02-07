@@ -24,6 +24,7 @@ import android.view.Surface;
 import android.view.WindowManagerGlobal;
 
 import org.lineageos.settings.device.SliderControllerBase;
+import org.lineageos.settings.device.utils.Constants;
 
 public final class RotationController extends SliderControllerBase {
 
@@ -41,20 +42,19 @@ public final class RotationController extends SliderControllerBase {
     }
 
     @Override
-    protected boolean processAction(int action) {
+    protected int processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         switch (action) {
             case ROTATION_AUTO:
-                return setRotation(false, 0);
+                return setRotation(false, 0) ? Constants.MODE_ROTATION_AUTO : 0;
             case ROTATION_0:
-                return setRotation(true, Surface.ROTATION_0);
+                return setRotation(true, Surface.ROTATION_0) ? Constants.MODE_ROTATION_0 : 0;
             case ROTATION_90:
-                return setRotation(true, Surface.ROTATION_90);
+                return setRotation(true, Surface.ROTATION_90) ? Constants.MODE_ROTATION_90 : 0;
             case ROTATION_270:
-                return setRotation(true, Surface.ROTATION_270);
-            default:
-                return false;
+                return setRotation(true, Surface.ROTATION_270) ? Constants.MODE_ROTATION_270 : 0;
         }
+        return 0;
     }
 
     @Override

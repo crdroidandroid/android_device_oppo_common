@@ -25,6 +25,7 @@ import android.util.Log;
 import android.util.SparseIntArray;
 
 import org.lineageos.settings.device.SliderControllerBase;
+import org.lineageos.settings.device.utils.Constants;
 
 public final class NotificationController extends SliderControllerBase {
 
@@ -60,7 +61,7 @@ public final class NotificationController extends SliderControllerBase {
     }
 
     @Override
-    protected boolean processAction(int action) {
+    protected int processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         if (MODES.indexOfKey(action) >= 0) {
             mZenMode = MODES.indexOfKey(action);
@@ -72,10 +73,16 @@ public final class NotificationController extends SliderControllerBase {
                     mNotificationManager.setZenMode(MODES.get(action), null, TAG);
                 }
             }, CHANGE_DELAY);
-            return true;
-        } else {
-            return false;
+            switch (action) {
+                case NOTIFICATION_TOTAL_SILENCE:
+                    return Constants.MODE_TOTAL_SILENCE;
+                case NOTIFICATION_PRIORITY_ONLY:
+                    return Constants.MODE_PRIORITY_ONLY;
+                case NOTIFICATION_ALL:
+                    return Constants.MODE_NONE;
+            }
         }
+        return 0;
     }
 
     @Override

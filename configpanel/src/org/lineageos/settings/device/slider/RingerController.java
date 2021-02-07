@@ -22,6 +22,7 @@ import android.util.Log;
 import android.util.SparseIntArray;
 
 import org.lineageos.settings.device.SliderControllerBase;
+import org.lineageos.settings.device.utils.Constants;
 
 public final class RingerController extends SliderControllerBase {
 
@@ -48,14 +49,20 @@ public final class RingerController extends SliderControllerBase {
     }
 
     @Override
-    protected boolean processAction(int action) {
+    protected int processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         if (MODES.indexOfKey(action) >= 0) {
             mAudioManager.setRingerModeInternal(MODES.get(action));
-            return true;
-        } else {
-            return false;
+            switch (action) {
+                case RINGER_NORMAL:
+                    return Constants.MODE_RING;
+                case RINGER_VIBRATE:
+                    return Constants.MODE_VIBRATE;
+                case RINGER_SILENT:
+                    return Constants.MODE_SILENT;
+            }
         }
+        return 0;
     }
 
     @Override

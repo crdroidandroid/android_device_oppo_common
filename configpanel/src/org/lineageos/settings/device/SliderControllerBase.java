@@ -64,44 +64,45 @@ public abstract class SliderControllerBase {
                 key == KEY_SLIDER_BOTTOM;
     }
 
-    protected abstract boolean processAction(int action);
+    protected abstract int processAction(int action);
 
-    public final boolean processEvent(Context context, int key) {
+    public final int processEvent(Context context, int key) {
         if (mActions == null) {
-            return false;
+            return 0;
         }
 
-        boolean processed = false;
+        int result = 0;
         switch (key) {
             case KEY_SLIDER_TOP:
-                processed = processAction(mActions[0]);
-                notifySliderChange(context, processed, 0);
+                result = processAction(mActions[0]);
+                notifySliderChange(context, result, 0);
                 break;
             case KEY_SLIDER_MIDDLE:
-                processed = processAction(mActions[1]);
-                notifySliderChange(context, processed, 1);
+                result = processAction(mActions[1]);
+                notifySliderChange(context, result, 1);
                 break;
             case KEY_SLIDER_BOTTOM:
-                processed = processAction(mActions[2]);
-                notifySliderChange(context, processed, 2);
+                result = processAction(mActions[2]);
+                notifySliderChange(context, result, 2);
                 break;
         }
 
-        if (processed) {
+        if (result > 0) {
             doHapticFeedback();
         }
 
-        return processed;
+        return result;
     }
 
-    private void notifySliderChange(Context context, boolean processed, int position) {
-        if (processed)
-            sendUpdateBroadcast(context, position);
+    private void notifySliderChange(Context context, int result, int position) {
+        if (result > 0)
+            sendUpdateBroadcast(context, position, result);
     }
 
-    public static void sendUpdateBroadcast(Context context, int position) {
+    public static void sendUpdateBroadcast(Context context, int position, int result) {
         Intent intent = new Intent(Constants.ACTION_UPDATE_SLIDER_POSITION);
         intent.putExtra(Constants.EXTRA_SLIDER_POSITION, position);
+        intent.putExtra(Constants.EXTRA_SLIDER_POSITION_VALUE, result);
         context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
         intent.setFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
         Log.d(TAG, "slider change to positon " + position);

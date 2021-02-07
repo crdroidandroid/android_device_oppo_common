@@ -25,6 +25,7 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import org.lineageos.settings.device.SliderControllerBase;
+import org.lineageos.settings.device.utils.Constants;
 
 public final class FlashlightController extends SliderControllerBase {
 
@@ -65,7 +66,7 @@ public final class FlashlightController extends SliderControllerBase {
     }
 
     @Override
-    protected boolean processAction(int action) {
+    protected int processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         boolean succeed;
         switch (action) {
@@ -75,7 +76,7 @@ public final class FlashlightController extends SliderControllerBase {
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
-                return succeed;
+                return succeed ? Constants.MODE_FLASHLIGHT_OFF : 0;
             case FLASHLIGHT_ON:
                 mCameraId = getCameraId();
                 succeed = setTorchMode(true);
@@ -83,19 +84,19 @@ public final class FlashlightController extends SliderControllerBase {
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
-                return succeed;
+                return succeed ? Constants.MODE_FLASHLIGHT_ON : 0;
             case FLASHLIGHT_BLINK:
                 mBlinkHandler.removeCallbacksAndMessages(null);
                 mCameraId = getCameraId();
                 if (setTorchMode(true)) {
                     mWakeLock.acquire();
                     mBlinkHandler.postDelayed(mBlinkRunnble, BLINK_INTERVAL);
-                    return true;
+                    return Constants.MODE_FLASHLIGHT_BLINK;
                 } else {
-                    return false;
+                    return 0;
                 }
             default:
-                return false;
+                return 0;
         }
     }
 

@@ -46,7 +46,7 @@ public abstract class SliderControllerBase {
 
     public SliderControllerBase(Context context) {
         mContext = context;
-        mVibrator = context.getSystemService(Vibrator.class);
+        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         if (mVibrator == null || !mVibrator.hasVibrator()) {
             mVibrator = null;
         }
